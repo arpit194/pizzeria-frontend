@@ -1,7 +1,11 @@
-import Test from "@/components/Test";
+import ThemeSelector from "@/components/ThemeSelector";
 
 function App() {
-  return <Test test={"test"} />;
+  return (
+    <div className="h-full bg-slate-200 dark:bg-slate-950 flex justify-center items-center">
+      <ThemeSelector />
+    </div>
+  );
 }
 
 export default App;
