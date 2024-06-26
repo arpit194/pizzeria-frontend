@@ -1,42 +1,15 @@
-import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useTheme } from "@/providers/ThemeProvider";
 
-const ThemeSelector = () => {
-  const [theme, setTheme] = useState<string | null>(
-    localStorage.getItem("theme")
-  );
-  useEffect(() => {
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-
-  const setThemeMode = (mode: string) => {
-    localStorage.theme = mode;
-    setTheme(mode);
-  };
+export default function ThemeSelector() {
+  const { setTheme } = useTheme();
 
   return (
     <div className="flex gap-2">
-      <button
-        className="bg-orange-400 text-slate-950 dark:bg-orange-950 dark:text-slate-100 p-2 rounded"
-        onClick={() => setThemeMode("dark")}
-      >
+      <Button variant={"secondary"} onClick={() => setTheme("dark")}>
         Dark
-      </button>
-      <button
-        className="bg-orange-400 text-slate-950 dark:bg-orange-950 dark:text-slate-100 p-2 rounded"
-        onClick={() => setThemeMode("light")}
-      >
-        Light
-      </button>
+      </Button>
+      <Button onClick={() => setTheme("light")}>Light</Button>
     </div>
   );
-};
-
-export default ThemeSelector;
+}
